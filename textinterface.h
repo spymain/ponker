@@ -1,16 +1,16 @@
 #ifndef TEXT_INTERFACE_H_
 #define TEXT_INTERFACE_H_
 
-#include "cards.h"
+#include <stdint.h>
 
-static const char *suites[] = {
+static const char * const suites[] = {
     "Hearts",
     "Clubs",
     "Diamonds",
     "Spades"
 };
 
-static const char *cards[] = {
+static const char * const cards[] = {
     "Two",
     "Three",
     "Four",
