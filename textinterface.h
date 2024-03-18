@@ -26,6 +26,6 @@ static const char * const cards[] = {
     "Ace"
 };
 
-void print_card(uint8_t card);
+char *card_name(int8_t card, char* buff, int len);
 
 #endif
