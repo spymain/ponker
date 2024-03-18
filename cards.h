@@ -8,6 +8,7 @@
 #define SUITES_AMOUNT   4
 
 void init_deck(uint8_t deck[DECK_AMOUNT]);
+void shuffle_deck(uint8_t deck[DECK_AMOUNT]);
 void swap_uint8_t(uint8_t *a, uint8_t *b);
 
 #endif

@@ -4,14 +4,17 @@
 #include "cards.h"
 
 void init_deck(uint8_t deck[DECK_AMOUNT]){
-    int i = 0;
 
     srand(time(NULL));
 
-    for(i = 0; i < DECK_AMOUNT; i++)
+    for(int i = 0; i < DECK_AMOUNT; i++)
         deck[i] = i;
 
-    for(i = 0; i < DECK_AMOUNT - 1; i++)
+    shuffle_deck(deck);
+}
+
+void shuffle_deck(uint8_t deck[DECK_AMOUNT]){
+    for(int i = 0; i < DECK_AMOUNT - 1; i++)
         swap_uint8_t(
                 &deck[i],
                 &deck[
