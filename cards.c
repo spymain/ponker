@@ -1,8 +1,21 @@
+/*
+ * @file cards.c
+ * @author fredstoller
+ *
+ * @brief Operations on "cards" (8bit ints)
+ */
 #include <stdlib.h>
 #include <time.h>
 
 #include "cards.h"
 
+/**
+ * @brief Fill an array of size DECK_AMOUNT
+ * with ascending int8 then shuffle.
+ *
+ *
+ * @param int8_t deck[DECK_AMOUNT] "deck" (array) of "cards" (bytes)
+ */
 void init_deck(int8_t deck[DECK_AMOUNT]){
 
     srand(time(NULL));
@@ -13,6 +26,11 @@ void init_deck(int8_t deck[DECK_AMOUNT]){
     shuffle_deck(deck);
 }
 
+/**
+ * @brief randomly order array akin to shuffling a deck of cards.
+ *
+ * @param int8_t deck[DECK_AMOUNT] "deck" (array) of "cards" (bytes)
+ */
 void shuffle_deck(int8_t deck[DECK_AMOUNT]){
     for(int i = 0; i < DECK_AMOUNT - 1; i++)
         swap_int8_t(
@@ -27,6 +45,15 @@ void shuffle_deck(int8_t deck[DECK_AMOUNT]){
             );
 }
 
+/*
+ * @brief Compare value of cards by number or suite if they are the same
+ *
+ * @param int8_t a First "card" (byte)
+ * @param int8_t b Second "card" (byte)
+ * @return int8_t difference of face value unless face value is equivalent,
+ * instead returning absolute difference in a sorted deck
+ * (2 to ace, heart, club, diamond spade)
+ */
 int8_t card_cmp(int8_t a, int8_t b){
     int8_t
         diff =
@@ -39,6 +66,13 @@ int8_t card_cmp(int8_t a, int8_t b){
         a - b;
 }
 
+/*
+ * @brief swap values of two variables
+ * (no effect if same value)
+ *
+ * @param int8_t *a address of first value
+ * @param int8_t *b address of second value
+ */
 void swap_int8_t(int8_t *a, int8_t *b){
     if(a == b) return;
 

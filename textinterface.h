@@ -1,8 +1,13 @@
+/*
+ * @file textinterface.h
+ * @author
+ */
 #ifndef TEXT_INTERFACE_H_
 #define TEXT_INTERFACE_H_
 
 #include <stdint.h>
 
+/// Names of suites
 static const char * const suites[] = {
     "Hearts",
     "Clubs",
@@ -10,6 +15,7 @@ static const char * const suites[] = {
     "Spades"
 };
 
+/// Names of cards (numbers)
 static const char * const cards[] = {
     "Two",
     "Three",
