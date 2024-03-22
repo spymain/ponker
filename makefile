@@ -5,13 +5,16 @@ OF=$(CF) -c
 
 all: clean $(NAME)
 
-$(NAME): main.c cards.o textinterface.o
+$(NAME): main.c cards.o textinterface.o swap_int8_t.o
 	$(CC) $(CF) $^ -o $@
 
 cards.o: cards.c cards.h
 	$(CC) $(OF) $<
 
 textinterface.o: textinterface.c textinterface.h
+	$(CC) $(OF) $<
+
+swap_int8_t.o: swap_int8_t.c swap_int8_t.h
 	$(CC) $(OF) $<
 
 clean:

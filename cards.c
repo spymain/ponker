@@ -8,6 +8,7 @@
 #include <time.h>
 
 #include "cards.h"
+#include "swap_int8_t.h"
 
 /**
  * @brief Fill an array of size DECK_AMOUNT
@@ -64,19 +65,4 @@ int8_t card_cmp(int8_t a, int8_t b){
         diff ?
         diff :
         a - b;
-}
-
-/*
- * @brief swap values of two variables
- * (no effect if same value)
- *
- * @param int8_t *a address of first value
- * @param int8_t *b address of second value
- */
-void swap_int8_t(int8_t *a, int8_t *b){
-    if(a == b) return;
-
-    *a ^= *b;
-    *b ^= *a;
-    *a ^= *b;
 }
