@@ -20,5 +20,6 @@
 void init_deck(int8_t deck[DECK_AMOUNT]);
 void shuffle_deck(int8_t deck[DECK_AMOUNT]);
 int8_t card_cmp(int8_t a, int8_t b);
+void sort_cards(int8_t *stack, int len);
 
 #endif

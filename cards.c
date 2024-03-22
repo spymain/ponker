@@ -9,6 +9,7 @@
 
 #include "cards.h"
 #include "swap_int8_t.h"
+#include "sort.h"
 
 /**
  * @brief Fill an array of size DECK_AMOUNT
@@ -65,4 +66,18 @@ int8_t card_cmp(int8_t a, int8_t b){
         diff ?
         diff :
         a - b;
+}
+
+/*
+ * @brief sort an array of cards with card_cmp
+ *
+ * @param int8_t *stack array of cards to sort
+ * @param int len num of cards in stack
+ */
+void sort_cards(int8_t *stack, int len){
+    quicksort(
+            stack,
+            len,
+            card_cmp
+        );
 }
