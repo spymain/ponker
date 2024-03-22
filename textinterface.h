@@ -6,6 +6,9 @@
 #define TEXT_INTERFACE_H_
 
 #include <stdint.h>
+#include "cards.h"
+
+#define NAME_MAX_LEN 18
 
 /// Names of suites
 static const char * const suites[] = {
@@ -33,5 +36,6 @@ static const char * const cards[] = {
 };
 
 char *card_name(int8_t card, char* buff, int len);
+void print_deck(int8_t deck[DECK_AMOUNT]);
 
 #endif

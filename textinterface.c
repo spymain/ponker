@@ -48,3 +48,25 @@ char *card_name(int8_t card, char* buff, int len){
 
     return buff;
 }
+
+void print_deck(int8_t deck[DECK_AMOUNT]){
+    char buff[NAME_MAX_LEN];
+
+    for(int i = 0; i < DECK_AMOUNT; i++){
+        card_name(
+                deck[i],
+                buff,
+                NAME_MAX_LEN
+            );
+
+        printf(
+                "%i:\t%s\t%s(%i)\n",
+                i,
+                buff,
+                /// The text can be less than 16 but not less than 8;
+                /// This keeps the card values in line with each other.
+                strlen(buff) < 16 ? "\t" : "",
+                deck[i]
+            );
+    }
+}
