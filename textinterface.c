@@ -49,10 +49,10 @@ char *card_name(int8_t card, char* buff, int len){
     return buff;
 }
 
-void print_deck(int8_t deck[DECK_AMOUNT]){
+void print_cards(int8_t *deck, int len){
     char buff[NAME_MAX_LEN];
 
-    for(int i = 0; i < DECK_AMOUNT; i++){
+    for(int i = 0; i < len; i++){
         card_name(
                 deck[i],
                 buff,

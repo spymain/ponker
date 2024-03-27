@@ -36,6 +36,6 @@ static const char * const cards[] = {
 };
 
 char *card_name(int8_t card, char* buff, int len);
-void print_deck(int8_t deck[DECK_AMOUNT]);
+void print_cards(int8_t *deck, int len);
 
 #endif

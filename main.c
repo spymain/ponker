@@ -21,12 +21,12 @@ int main(void){
     init_deck(deck);
 
     //*
-    print_deck(deck);
+    print_cards(deck, DECK_AMOUNT);
 
     sort_cards(deck, DECK_AMOUNT);
     puts("\n\nSorted:");
 
-    print_deck(deck);
+    print_cards(deck, DECK_AMOUNT);
     //*/
 
     return 0;
