@@ -14,8 +14,14 @@
 /// The total amount of suites
 #define SUITES_AMOUNT   4
 
-/// The number of cards a player will use to determine their hand
-#define HAND_SIZE       5
+/// The number of hole cards each player has
+/// (Max high cards to consider)
+#define HOLE_CARDS      2
+/// The number of cards on the board
+/// (community cards)
+#define BOARD_CARDS     5
+
+#define TOTAL_CARDS     HOLE_CARDS + BOARD_CARDS
 
 void init_deck(int8_t deck[DECK_AMOUNT]);
 void shuffle_deck(int8_t deck[DECK_AMOUNT]);

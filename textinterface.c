@@ -9,6 +9,8 @@
 
 #include "textinterface.h"
 #include "cards.h"
+#include "nibble.h"
+#include "cards.h"
 
 /*
  * @brief copy face value and suite of given card to a char buffer
@@ -49,6 +51,12 @@ char *card_name(int8_t card, char* buff, int len){
     return buff;
 }
 
+/*
+ * @brief sequentially print names of cards in an array
+ *
+ * @param int8_t *deck list to print
+ * @param int len amount of cards to print
+ */
 void print_cards(int8_t *deck, int len){
     char buff[NAME_MAX_LEN];
 
@@ -59,6 +67,10 @@ void print_cards(int8_t *deck, int len){
                 NAME_MAX_LEN
             );
 
+        /// Regular Print
+        puts(buff);
+        /*
+        /// Debug print
         printf(
                 "%i:\t%s\t%s(%i)\n",
                 i,
@@ -67,6 +79,29 @@ void print_cards(int8_t *deck, int len){
                 /// This keeps the card values in line with each other.
                 strlen(buff) < 16 ? "\t" : "",
                 deck[i]
-            );
+            );//*/
     }
+}
+
+/*
+ * @brief translates a hand encoding to text and prints it.
+ *
+ * @param hand_t hand the encoding to translate
+ */
+void print_hand(hand_t hand){
+    int card = nibble_read(
+                        hand,
+                        HOLE_CARDS
+                    );
+    printf(
+            "%s %s%s\n",
+            hands[
+                nibble_read(
+                    hand,
+                    HOLE_CARDS + 1
+                )
+            ],
+            cards[card],
+            card == 4 ? "es" : "s"
+        );
 }

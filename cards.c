@@ -54,7 +54,7 @@ void shuffle_deck(int8_t deck[DECK_AMOUNT]){
  * @param int8_t b Second "card" (byte)
  * @return int8_t difference of face value unless face value is equivalent,
  * instead returning absolute difference in a sorted deck
- * (2 to ace, heart, club, diamond spade)
+ * (2 to ace, heart, club, diamond, spade)
  */
 int8_t card_cmp(int8_t a, int8_t b){
     int8_t
@@ -69,7 +69,7 @@ int8_t card_cmp(int8_t a, int8_t b){
 }
 
 /*
- * @brief sort an array of cards with card_cmp
+ * @brief sort an array of cards in ascending order with card_cmp
  *
  * @param int8_t *stack array of cards to sort
  * @param int len num of cards in stack

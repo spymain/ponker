@@ -49,3 +49,15 @@ void quicksort(int8_t *list, int len, int8_t (*cmp)(int8_t, int8_t)){
             cmp
         );
 }
+
+/*
+ * @brief compare two int8_t, report lesser as more signifigant
+ *
+ * @param int8_t a first to compare
+ * @param int8_t b second to compare
+ * @return difference between a & b;
+ * > 0 if b is larger
+ */
+int8_t cmp_desc(int8_t a, int8_t b){
+    return b - a;
+}

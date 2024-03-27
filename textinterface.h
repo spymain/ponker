@@ -6,7 +6,8 @@
 #define TEXT_INTERFACE_H_
 
 #include <stdint.h>
-#include "cards.h"
+
+#include "five_card.h"
 
 #define NAME_MAX_LEN 18
 
@@ -18,7 +19,7 @@ static const char * const suites[] = {
     "Spades"
 };
 
-/// Names of cards (numbers)
+/// Names of ranks (numbers)
 static const char * const cards[] = {
     "Two",
     "Three",
@@ -35,7 +36,22 @@ static const char * const cards[] = {
     "Ace"
 };
 
+/// Names of hands
+static const char * const hands[] = {
+    "High",
+    "Pair",
+    "Two Pair",
+    "Three",
+    "Straight",
+    "Flush",
+    "Full House",
+    "Four",
+    "Straight Flush",
+    "Royal Flush"
+};
+
 char *card_name(int8_t card, char* buff, int len);
 void print_cards(int8_t *deck, int len);
+void print_hand(hand_t hand);
 
 #endif
