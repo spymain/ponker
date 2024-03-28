@@ -68,8 +68,8 @@ void print_cards(int8_t *deck, int len){
             );
 
         /// Regular Print
-        puts(buff);
-        /*
+        //puts(buff);
+        //*
         /// Debug print
         printf(
                 "%i:\t%s\t%s(%i)\n",
@@ -89,19 +89,20 @@ void print_cards(int8_t *deck, int len){
  * @param hand_t hand the encoding to translate
  */
 void print_hand(hand_t hand){
-    int card = nibble_read(
+    int
+        rank = nibble_read(
+                hand,
+                HOLE_CARDS + 1
+            ),
+        card = nibble_read(
                         hand,
                         HOLE_CARDS
                     );
     printf(
             "%s %s%s\n",
-            hands[
-                nibble_read(
-                    hand,
-                    HOLE_CARDS + 1
-                )
-            ],
+            hands[rank],
             cards[card],
-            card == 4 ? "es" : "s"
+            card == 4 ? "es" :
+            rank == 0 ? ""   : "s"
         );
 }

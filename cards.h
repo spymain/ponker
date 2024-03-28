@@ -13,7 +13,6 @@
 #define CARDS_IN_SUITE  13
 /// The total amount of suites
 #define SUITES_AMOUNT   4
-
 /// The number of hole cards each player has
 /// (Max high cards to consider)
 #define HOLE_CARDS      2

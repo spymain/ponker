@@ -14,6 +14,7 @@
 void check_tuples(hand_t *encoding, int8_t *hand, int len);
 void find_tuples(int8_t *hand, int len, int8_t *tuples);
 void encode_tuples(hand_t *encoding, int8_t *tuples);
+void check_high_cards(hand_t *encoding, int8_t *hand, int len);
 
 /*
  * @brief map list of cards to best poker hand that can be formed using them
@@ -44,8 +45,17 @@ hand_t encode_hand(int8_t *hand_cards, int len){
             len
         );
 
+    invert_list(hand, len);
+
     // Count straights
     // Count suits
+
+    check_high_cards(
+            &encoding,
+            hand,
+            len
+        );
+
     return encoding;
 }
 
@@ -158,4 +168,60 @@ void encode_tuples(hand_t *encoding, int8_t *tuples){
                     HOLE_CARDS - 1
             );
     }
+}
+
+/*
+ * @brief copy high card to encoding as necessary
+ *
+ * Straight, flush, full house and straight flush have no hole cards.
+ * copy the hole cards of the hand from highest to lowest to the hand,
+ * only copy as many as the hand can hold.
+ *
+ * @param hand_t *encoding data to copy hole cards to
+ * @param int8_t *hand list of cards in hand (assume sort by rank desc)
+ * @param int len length of list
+ */
+void check_high_cards(hand_t *encoding, int8_t *hand, int len){
+    int
+        i, j, k = 0,
+        relevants,
+        holes,
+        rank = *encoding >> (HOLE_CARDS + 1) * NIB_BITS;
+
+    if(
+        rank == STRAIGHT    ||
+        rank == FLUSH       ||
+        rank == FULL_HOUSE  ||
+        rank == STRAIGHT_FLUSH
+    ) return;
+
+
+    rank = *encoding >> (HOLE_CARDS + 1) * NIB_BITS;
+    relevants = num_cards[rank];
+    holes = num_holes[rank];
+
+    int8_t hand_holes[holes];
+    memset(hand_holes, 0, sizeof(*hand_holes) * holes);
+
+    for(i = 0; i < len; i++){
+        for(j = 0; j < relevants; j++)
+            if(
+                (hand[i] -
+                nibble_read(
+                    *encoding,
+                    HOLE_CARDS - j
+                )) %
+                CARDS_IN_SUITE == 0
+            ) break;
+
+        hand_holes[k++] = hand[i] % 13;
+        if(k >= holes) break;
+    }
+
+    for(i = 0; i < holes; i++)
+        nibble_cpy(
+                encoding,
+                hand_holes[i],
+                HOLE_CARDS - i - relevants
+            );
 }

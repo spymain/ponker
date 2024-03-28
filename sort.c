@@ -51,6 +51,20 @@ void quicksort(int8_t *list, int len, int8_t (*cmp)(int8_t, int8_t)){
 }
 
 /*
+ * @brief invert the order of a list of int8_t
+ *
+ * @param int8_t *list list to invert
+ * @param int len number of elements in list
+ */
+void invert_list(int8_t *list, int len){
+    for(int i = 0; i < len/2; i++)
+        swap_int8_t(
+                list + i,
+                list + len - 1 - i
+            );
+}
+
+/*
  * @brief compare two int8_t, report lesser as more signifigant
  *
  * @param int8_t a first to compare
