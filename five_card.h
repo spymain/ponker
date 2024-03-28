@@ -16,6 +16,11 @@
 
 typedef  int32_t    hand_t;
 
+/// Nibble offset of most signifigant nibble (to use)
+#define RANK_NIB    5
+/// Nibble offset of most signifigant hole card
+#define HOLE_NIB    RANK_NIB - 1
+
 enum hand_rank {
     HIGH_CARD,
     ONE_PAIR,

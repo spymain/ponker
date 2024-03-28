@@ -148,7 +148,7 @@ void encode_tuples(hand_t *encoding, int8_t *tuples){
         nibble_cpy(
                 encoding,
                 final_hand,
-                HOLE_CARDS + 1
+                RANK_NIB
             );
         nibble_cpy(
                 encoding,
@@ -156,7 +156,7 @@ void encode_tuples(hand_t *encoding, int8_t *tuples){
                     *tuples,
                     0
                 ),
-                HOLE_CARDS
+                HOLE_NIB
             );
         if(
                 final_hand == TWO_PAIR ||
@@ -165,7 +165,7 @@ void encode_tuples(hand_t *encoding, int8_t *tuples){
             nibble_cpy(
                     encoding,
                     tuples[1],
-                    HOLE_CARDS - 1
+                    HOLE_NIB - 1
             );
     }
 }
@@ -186,7 +186,7 @@ void check_high_cards(hand_t *encoding, int8_t *hand, int len){
         i, j, k = 0,
         relevants,
         holes,
-        rank = *encoding >> (HOLE_CARDS + 1) * NIB_BITS;
+        rank = *encoding >> (RANK_NIB) * NIB_BITS;
 
     if(
         rank == STRAIGHT    ||
@@ -196,7 +196,6 @@ void check_high_cards(hand_t *encoding, int8_t *hand, int len){
     ) return;
 
 
-    rank = *encoding >> (HOLE_CARDS + 1) * NIB_BITS;
     relevants = num_cards[rank];
     holes = num_holes[rank];
 
@@ -209,7 +208,7 @@ void check_high_cards(hand_t *encoding, int8_t *hand, int len){
                 (hand[i] -
                 nibble_read(
                     *encoding,
-                    HOLE_CARDS - j
+                    HOLE_NIB - j
                 )) %
                 CARDS_IN_SUITE == 0
             ) break;
@@ -222,6 +221,6 @@ void check_high_cards(hand_t *encoding, int8_t *hand, int len){
         nibble_cpy(
                 encoding,
                 hand_holes[i],
-                HOLE_CARDS - i - relevants
+                HOLE_NIB - relevants - i
             );
 }

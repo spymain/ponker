@@ -90,13 +90,10 @@ void print_cards(int8_t *deck, int len){
  */
 void print_hand(hand_t hand){
     int
-        rank = nibble_read(
-                hand,
-                HOLE_CARDS + 1
-            ),
+        rank = hand >> RANK_NIB * NIB_BITS,
         card = nibble_read(
                         hand,
-                        HOLE_CARDS
+                        HOLE_NIB
                     );
     printf(
             "%s %s%s\n",
