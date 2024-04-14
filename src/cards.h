@@ -7,6 +7,8 @@
 
 #include <stdint.h>
 
+typedef int8_t card_t;
+
 /// Amount of cards in the deck
 #define DECK_AMOUNT     52
 /// Amount of cards in a suite
@@ -14,10 +16,10 @@
 /// The total amount of suites
 #define SUITES_AMOUNT   4
 /// The number of hole cards each player has
+
 /// (Max high cards to consider)
 #define HOLE_CARDS      2
-/// The number of cards on the board
-/// (community cards)
+/// The number of cards on the board (community cards)
 #define BOARD_CARDS     5
 
 #define TOTAL_CARDS     HOLE_CARDS + BOARD_CARDS

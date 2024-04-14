@@ -7,14 +7,13 @@
 #include <string.h>
 
 #include "five_card.h"
-#include "cards.h"
 #include "sort.h"
 #include "nibble.h"
 
-void check_tuples(hand_t *encoding, int8_t *hand, int len);
-void find_tuples(int8_t *hand, int len, int8_t *tuples);
-void encode_tuples(hand_t *encoding, int8_t *tuples);
-void check_high_cards(hand_t *encoding, int8_t *hand, int len);
+void check_tuples(hand_t *encoding, card_t *hand, int len);
+void find_tuples(card_t *hand, int len, card_t *tuples);
+void encode_tuples(hand_t *encoding, card_t *tuples);
+void check_high_cards(hand_t *encoding, card_t *hand, int len);
 
 /*
  * @brief map list of cards to best poker hand that can be formed using them
@@ -27,10 +26,11 @@ void check_high_cards(hand_t *encoding, int8_t *hand, int len);
  * (e.g., this is where two for pair of twos is stored; not necessarily high card)
  * Following nibbles store ranks of high cards (if applicable)
  */
-hand_t encode_hand(int8_t *hand_cards, int len){
-    int8_t hand[len];
+hand_t encode_hand(card_t *hand_cards, int len){
+    card_t hand[len];
     hand_t encoding = 0;
 
+    //use memcpy instead
     for(int i = 0; i < len; i++)
         hand[i] = hand_cards[i];
 
@@ -39,6 +39,9 @@ hand_t encode_hand(int8_t *hand_cards, int len){
             len
         );
 
+    //Check for flush
+    //Check for straight
+
     check_tuples(
             &encoding,
             hand,
@@ -46,9 +49,6 @@ hand_t encode_hand(int8_t *hand_cards, int len){
         );
 
     invert_list(hand, len);
-
-    // Count straights
-    // Count suits
 
     check_high_cards(
             &encoding,
@@ -64,11 +64,11 @@ hand_t encode_hand(int8_t *hand_cards, int len){
  * copy to encoding  if so; Assumes sorted by rank.
  *
  * @param hand_t *encoding pointer to data where encoding will be copied to
- * @param int8_t *hand list of cards to check
+ * @param card_t *hand list of cards to check
  * @param int len amount of cards to check
  */
-void check_tuples(hand_t *encoding, int8_t *hand, int len){
-    int8_t
+void check_tuples(hand_t *encoding, card_t *hand, int len){
+    card_t
         poss_tup    = len/2 + 1,
         tuples[poss_tup];
 
@@ -84,11 +84,11 @@ void check_tuples(hand_t *encoding, int8_t *hand, int len){
 /*
  * @brief loop through list of cards and count tuples
  *
- * @param int8_t *hand sorted list of cards to count (assumes sort by rank)
+ * @param card_t *hand sorted list of cards to count (assumes sort by rank)
  * @param int len amount of cards to consider
- * @param int8_t *tuples list to copy found tuples to
+ * @param card_t *tuples list to copy found tuples to
  */
-void find_tuples(int8_t *hand, int len, int8_t *tuples){
+void find_tuples(card_t *hand, int len, card_t *tuples){
     int
         buff    = 0,
         current = 0;
@@ -102,7 +102,7 @@ void find_tuples(int8_t *hand, int len, int8_t *tuples){
         ){
             buff = tuples[current];
             nibble_inc(&buff, 1);
-            tuples[current] = (int8_t)buff;
+            tuples[current] = (card_t)buff;
         } else {
             if(tuples[current]){
                 buff = tuples[current];
@@ -111,7 +111,7 @@ void find_tuples(int8_t *hand, int len, int8_t *tuples){
                         hand[i - 1] % 13,
                         0
                     );
-                tuples[current] = (int8_t)buff;
+                tuples[current] = (card_t)buff;
                 current++;
             }
         }
@@ -121,11 +121,11 @@ void find_tuples(int8_t *hand, int len, int8_t *tuples){
  * @brief translate list of tuples to poker hand encoding
  *
  * @param hand_t *encoding data to copy encoding to
- * @param int8_t *tuples list of tuples to encode
+ * @param card_t *tuples list of tuples to encode
  */
-void encode_tuples(hand_t *encoding, int8_t *tuples){
+void encode_tuples(hand_t *encoding, card_t *tuples){
     hand_t final_hand = 0;
-    int8_t
+    card_t
         first_tup = tuples[0] >> NIB_BITS,
         second_tup = tuples[1] >> NIB_BITS;
 
@@ -178,14 +178,11 @@ void encode_tuples(hand_t *encoding, int8_t *tuples){
  * only copy as many as the hand can hold.
  *
  * @param hand_t *encoding data to copy hole cards to
- * @param int8_t *hand list of cards in hand (assume sort by rank desc)
+ * @param card_t *hand list of cards in hand (assume sort by rank desc)
  * @param int len length of list
  */
-void check_high_cards(hand_t *encoding, int8_t *hand, int len){
+void check_high_cards(hand_t *encoding, card_t *hand, int len){
     int
-        i, j, k = 0,
-        relevants,
-        holes,
         rank = *encoding >> (RANK_NIB) * NIB_BITS;
 
     if(
@@ -195,11 +192,15 @@ void check_high_cards(hand_t *encoding, int8_t *hand, int len){
         rank == STRAIGHT_FLUSH
     ) return;
 
+    int
+        i, j, k = 0,
+        relevants,
+        holes;
 
     relevants = num_cards[rank];
     holes = num_holes[rank];
 
-    int8_t hand_holes[holes];
+    card_t hand_holes[holes];
     memset(hand_holes, 0, sizeof(*hand_holes) * holes);
 
     for(i = 0; i < len; i++){

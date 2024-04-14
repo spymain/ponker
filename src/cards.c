@@ -15,10 +15,9 @@
  * @brief Fill an array of size DECK_AMOUNT
  * with ascending int8 then shuffle.
  *
- *
- * @param int8_t deck[DECK_AMOUNT] "deck" (array) of "cards" (bytes)
+ * @param card_t deck[DECK_AMOUNT] "deck" (array) of "cards" (bytes)
  */
-void init_deck(int8_t deck[DECK_AMOUNT]){
+void init_deck(card_t deck[DECK_AMOUNT]){
 
     srand(time(NULL));
 
@@ -31,9 +30,9 @@ void init_deck(int8_t deck[DECK_AMOUNT]){
 /**
  * @brief randomly order array akin to shuffling a deck of cards.
  *
- * @param int8_t deck[DECK_AMOUNT] "deck" (array) of "cards" (bytes)
+ * @param card_t deck[DECK_AMOUNT] "deck" (array) of "cards" (bytes)
  */
-void shuffle_deck(int8_t deck[DECK_AMOUNT]){
+void shuffle_deck(card_t deck[DECK_AMOUNT]){
     for(int i = 0; i < DECK_AMOUNT - 1; i++)
         swap_int8_t(
                 &deck[i],
@@ -50,14 +49,14 @@ void shuffle_deck(int8_t deck[DECK_AMOUNT]){
 /*
  * @brief Compare value of cards by number or suite if they are the same
  *
- * @param int8_t a First "card" (byte)
- * @param int8_t b Second "card" (byte)
- * @return int8_t difference of face value unless face value is equivalent,
+ * @param card_t a First "card" (byte)
+ * @param card_t b Second "card" (byte)
+ * @return card_t difference of face value unless face value is equivalent,
  * instead returning absolute difference in a sorted deck
  * (2 to ace, heart, club, diamond, spade)
  */
-int8_t card_cmp(int8_t a, int8_t b){
-    int8_t
+card_t card_cmp(card_t a, card_t b){
+    card_t
         diff =
             (a % CARDS_IN_SUITE) -
             (b % CARDS_IN_SUITE);
@@ -71,10 +70,10 @@ int8_t card_cmp(int8_t a, int8_t b){
 /*
  * @brief sort an array of cards in ascending order with card_cmp
  *
- * @param int8_t *stack array of cards to sort
+ * @param card_t *stack array of cards to sort
  * @param int len num of cards in stack
  */
-void sort_cards(int8_t *stack, int len){
+void sort_cards(card_t *stack, int len){
     quicksort(
             stack,
             len,

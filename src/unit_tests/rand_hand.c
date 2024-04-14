@@ -12,7 +12,7 @@
 #include "textinterface.h"
 
 int main(void){
-    int8_t
+    card_t
         deck[DECK_AMOUNT];
     init_deck(deck);
 

@@ -13,7 +13,7 @@
 #include "cards.h"
 
 int main(int argc, char *argv[]){
-    int8_t hand[argc - 1];
+    card_t hand[argc - 1];
     hand_t final_hand = 0;
     if(argc < 2){
         printf(

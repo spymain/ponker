@@ -5,7 +5,7 @@
 #ifndef FIVE_CARD_H_
 #define FIVE_CARD_H_
 
-#include <stdint.h>
+#include "cards.h"
 
 #define HAND_SIZE   5
 
@@ -13,6 +13,7 @@
 /// you can only have a maximum of 2 tuples
 /// (e.g. 2 pairs, 1 pair and 1 triple, or 1 quad)
 #define MAX_TUPLES  2
+//#define MAX_TUPLES  HAND_SIZE / 2
 
 typedef  int32_t    hand_t;
 
@@ -59,6 +60,6 @@ static const int num_holes[] = {
     0  // STRAIGHT_FLUSH
 };
 
-hand_t encode_hand(int8_t *hand_cards, int len);
+hand_t encode_hand(card_t *hand_cards, int len);
 
 #endif

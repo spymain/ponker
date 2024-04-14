@@ -50,8 +50,8 @@ static const char * const hands[] = {
     "Royal Flush"
 };
 
-char *card_name(int8_t card, char* buff, int len);
-void print_cards(int8_t *deck, int len);
+char *card_name(card_t card, char* buff, int len);
+void print_cards(card_t *deck, int len);
 void print_hand(hand_t hand);
 
 #endif

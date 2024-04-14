@@ -14,10 +14,10 @@
 
 /*
  * @brief copy face value and suite of given card to a char buffer
- * @param int8_t card value to parse
+ * @param card_t card value to parse
  * @param char *buff buffer to copy name to
  */
-char *card_name(int8_t card, char* buff, int len){
+char *card_name(card_t card, char* buff, int len){
     int 
         cardnum     =   card % CARDS_IN_SUITE,
         suitenum    =   (card / CARDS_IN_SUITE) % SUITES_AMOUNT,
@@ -54,10 +54,10 @@ char *card_name(int8_t card, char* buff, int len){
 /*
  * @brief sequentially print names of cards in an array
  *
- * @param int8_t *deck list to print
+ * @param card_t *deck list to print
  * @param int len amount of cards to print
  */
-void print_cards(int8_t *deck, int len){
+void print_cards(card_t *deck, int len){
     char buff[NAME_MAX_LEN];
 
     for(int i = 0; i < len; i++){

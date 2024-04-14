@@ -8,7 +8,7 @@
 #include "textinterface.h"
 
 int main(void){
-    int8_t deck[DECK_AMOUNT];
+    card_t deck[DECK_AMOUNT];
     init_deck(deck);
 
     print_cards(deck, DECK_AMOUNT);
