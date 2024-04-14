@@ -8,7 +8,7 @@
 #include <time.h>
 
 #include "cards.h"
-#include "swap_int8_t.h"
+#include "swap.h"
 #include "sort.h"
 
 /**

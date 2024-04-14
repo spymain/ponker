@@ -2,8 +2,8 @@
  * @file int8_t_swap.c
  * @author fredstoller
  */
-#ifndef SWAP_INT8_T_H_
-#define SWAP_INT8_T_H_
+#ifndef SWAP_H_
+#define SWAP_H_
 
 #include <stdint.h>
 

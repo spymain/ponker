@@ -4,7 +4,7 @@
  *
  * @brief function for swapping the values of two int8_t
  */
-#include "swap_int8_t.h"
+#include "swap.h"
 
 /*
  * @brief swap values of two variables

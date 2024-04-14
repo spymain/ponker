@@ -13,7 +13,7 @@ all: $(BINS)
 #     MAIN PROGRAM
 # ====================
 
-$(NAME): main.c cards.o textinterface.o swap_int8_t.o sort.o five_card.o nibble.o
+$(NAME): main.c cards.o textinterface.o swap.o sort.o five_card.o nibble.o
 	$(CC) $(CF) $^ -o $@
 
 # ==================
@@ -23,13 +23,13 @@ $(NAME): main.c cards.o textinterface.o swap_int8_t.o sort.o five_card.o nibble.
 TD=unit_tests
 UF=-I$(shell pwd)
 
-shuffle: $(TD)/shuffle.c cards.o textinterface.o swap_int8_t.o sort.o five_card.o nibble.o
+shuffle: $(TD)/shuffle.c cards.o textinterface.o swap.o sort.o five_card.o nibble.o
 	$(CC) $(CF)$(UF)  $^ -o $@
 
-rand_hand: $(TD)/rand_hand.c cards.o sort.o textinterface.o five_card.o swap_int8_t.o nibble.o
+rand_hand: $(TD)/rand_hand.c cards.o sort.o textinterface.o five_card.o swap.o nibble.o
 	$(CC) $(CF)$(UF)  $^ -o $@
 
-best_hand: $(TD)/best_hand.c cards.o sort.o textinterface.o five_card.o swap_int8_t.o nibble.o
+best_hand: $(TD)/best_hand.c cards.o sort.o textinterface.o five_card.o swap.o nibble.o
 	$(CC) $(CF) $(UF) $^ -o $@
 
 # ===============
@@ -42,7 +42,7 @@ cards.o: cards.c cards.h
 textinterface.o: textinterface.c textinterface.h
 	$(CC) $(OF) $<
 
-swap_int8_t.o: swap_int8_t.c swap_int8_t.h
+swap.o: swap.c swap.h
 	$(CC) $(OF) $<
 
 sort.o: sort.c sort.h

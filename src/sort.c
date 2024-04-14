@@ -5,7 +5,7 @@
  * @brief functions for sorting int8_t with generic compare
  */
 #include "sort.h"
-#include "swap_int8_t.h"
+#include "swap.h"
 
 /*
  * @brief Lomuto partitioned quicksort
