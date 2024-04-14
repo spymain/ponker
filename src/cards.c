@@ -5,7 +5,6 @@
  * @brief Operations on "cards" (8bit ints)
  */
 #include <stdlib.h>
-#include <time.h>
 
 #include "cards.h"
 #include "swap.h"
@@ -18,9 +17,6 @@
  * @param card_t deck[DECK_AMOUNT] "deck" (array) of "cards" (bytes)
  */
 void init_deck(card_t deck[DECK_AMOUNT]){
-
-    srand(time(NULL));
-
     for(int i = 0; i < DECK_AMOUNT; i++)
         deck[i] = i;
 
@@ -38,9 +34,8 @@ void shuffle_deck(card_t deck[DECK_AMOUNT]){
                 &deck[i],
                 &deck[
                     i +
-                    rand() % (
-                        DECK_AMOUNT -
-                        i
+                    arc4random_uniform(
+                        DECK_AMOUNT - i
                     )
                 ]
             );
