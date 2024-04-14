@@ -24,9 +24,9 @@ typedef int8_t card_t;
 
 #define TOTAL_CARDS     HOLE_CARDS + BOARD_CARDS
 
-void init_deck(int8_t deck[DECK_AMOUNT]);
-void shuffle_deck(int8_t deck[DECK_AMOUNT]);
-int8_t card_cmp(int8_t a, int8_t b);
-void sort_cards(int8_t *stack, int len);
+void init_deck(card_t deck[DECK_AMOUNT]);
+void shuffle_deck(card_t deck[DECK_AMOUNT]);
+card_t card_cmp(card_t a, card_t b);
+void sort_cards(card_t *stack, int len);
 
 #endif
