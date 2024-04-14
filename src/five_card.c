@@ -30,9 +30,11 @@ hand_t encode_hand(card_t *hand_cards, int len){
     card_t hand[len];
     hand_t encoding = 0;
 
-    //use memcpy instead
-    for(int i = 0; i < len; i++)
-        hand[i] = hand_cards[i];
+    memcpy(
+        hand,
+        hand_cards,
+        sizeof(card_t) * len
+    );
 
     sort_cards(
             hand,
