@@ -16,37 +16,27 @@
  * @brief copy face value and suite of given card to a char buffer
  * @param card_t card value to parse
  * @param char *buff buffer to copy name to
+ * @param int len max buff size to print name to
+ * (should be NAME_MAX_LEN)
  */
 char *card_name(card_t card, char* buff, int len){
-    int 
-        cardnum     =   card % CARDS_IN_SUITE,
-        suitenum    =   (card / CARDS_IN_SUITE) % SUITES_AMOUNT,
-        cardlen     =   strlen(cards[cardnum]),
-        suitelen    =   strlen(suites[suitenum]);
-
     memset(
             buff,
             0,
             len
         );
 
-    strncpy(
-            buff,
-            cards[cardnum],
-            cardlen
-        );
-
-    strncpy(
-            buff + cardlen,
-            " of ",
-            5
-        );
-
-    strncpy(
-            buff + cardlen + 4,
-            suites[suitenum],
-            suitelen
-        );
+    snprintf(
+        buff,
+        len,
+        "%s of %s",
+        cards[
+            card % CARDS_IN_SUITE
+        ],
+        suites[
+            (card / CARDS_IN_SUITE) % SUITES_AMOUNT
+        ]
+    );
 
     return buff;
 }
