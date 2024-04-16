@@ -11,8 +11,6 @@ typedef int8_t card_t;
 
 /// Amount of cards in the deck
 #define DECK_AMOUNT     52
-/// Amount of cards in a suite
-#define CARDS_IN_SUITE  13
 /// The total amount of suites
 #define SUITES_AMOUNT   4
 /// The number of hole cards each player has
@@ -23,6 +21,23 @@ typedef int8_t card_t;
 #define BOARD_CARDS     5
 
 #define TOTAL_CARDS     HOLE_CARDS + BOARD_CARDS
+
+enum card_names {
+    CARD_TWO,
+    CARD_THREE,
+    CARD_FOUR,
+    CARD_FIVE,
+    CARD_SIX,
+    CARD_SEVEN,
+    CARD_EIGHT,
+    CARD_NINE,
+    CARD_TEN,
+    CARD_JACK,
+    CARD_QUEEN,
+    CARD_KING,
+    CARD_ACE,
+    CARDS_IN_SUITE
+};
 
 void init_deck(card_t deck[DECK_AMOUNT]);
 void shuffle_deck(card_t deck[DECK_AMOUNT]);
