@@ -24,10 +24,10 @@ TD=unit_tests
 UF=-I$(shell pwd)
 
 shuffle: $(TD)/shuffle.c cards.o textinterface.o swap.o sort.o five_card.o nibble.o
-	$(CC) $(CF)$(UF)  $^ -o $@
+	$(CC) $(CF) $(UF)  $^ -o $@
 
 rand_hand: $(TD)/rand_hand.c cards.o sort.o textinterface.o five_card.o swap.o nibble.o
-	$(CC) $(CF)$(UF)  $^ -o $@
+	$(CC) $(CF) $(UF)  $^ -o $@
 
 best_hand: $(TD)/best_hand.c cards.o sort.o textinterface.o five_card.o swap.o nibble.o
 	$(CC) $(CF) $(UF) $^ -o $@
