@@ -11,7 +11,7 @@
 #include "nibble.h"
 
 void check_tuples(hand_t *encoding, card_t *hand, int len);
-void find_tuples(card_t *hand, int len, card_t *tuples);
+int find_tuples(card_t *hand, int len, card_t *tuples);
 void encode_tuples(hand_t *encoding, card_t *tuples);
 void check_high_cards(hand_t *encoding, card_t *hand, int len);
 
@@ -70,15 +70,15 @@ hand_t encode_hand(card_t *hand_cards, int len){
  * @param int len amount of cards to check
  */
 void check_tuples(hand_t *encoding, card_t *hand, int len){
-    card_t
-        poss_tup    = len/2 + 1,
-        tuples[poss_tup];
+    int poss_tuples = len/2 + 1;
+    card_t tuples[poss_tuples];
+    memset(tuples, 0, sizeof(*tuples) * poss_tuples);
 
-    memset(tuples, 0, sizeof(*tuples) * poss_tup);
+    int found_tuples = find_tuples(hand, len, tuples);
 
-    find_tuples(hand, len, tuples);
-
-    quicksort(tuples, poss_tup, cmp_desc);
+    if(found_tuples){
+        invert_list(tuples, found_tuples);
+    }
 
     encode_tuples(encoding, tuples);
 }
@@ -89,8 +89,9 @@ void check_tuples(hand_t *encoding, card_t *hand, int len){
  * @param card_t *hand sorted list of cards to count (assumes sort by rank)
  * @param int len amount of cards to consider
  * @param card_t *tuples list to copy found tuples to
+ * @return int number of tuples found
  */
-void find_tuples(card_t *hand, int len, card_t *tuples){
+int find_tuples(card_t *hand, int len, card_t *tuples){
     int
         buff    = 0,
         current = 0;
@@ -117,6 +118,7 @@ void find_tuples(card_t *hand, int len, card_t *tuples){
                 current++;
             }
         }
+    return current;
 }
 
 /*
